@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 
 import { State } from "../../reducers";
 import { IRestaurant, IRestaurantUpdates } from "../../types/restaurantTypes";
-import { getRestaurants, updateRestaurant } from "../../services/restaurantService";
+import {
+    getRestaurants,
+    updateRestaurant,
+    deleteRestaurant as serviceDeleteRestaurant
+} from "../../services/restaurantService";
 import RestaurantSelector from "./RestaurantSelector";
 import CurrentRestaurant from "./CurrentRestaurant";
 
@@ -30,6 +34,13 @@ const RestaurantHome = () => {
         await fetchRestaurants(restaurantId);
     };
 
+    const deleteRestaurant = async (restaurantId: number) => {
+        const deleted = await serviceDeleteRestaurant(token, restaurantId);
+        if (deleted) {
+            await fetchRestaurants();
+        }
+    };
+
     useEffect(() => {
         fetchRestaurants();
     }, [fetchRestaurants]);
@@ -42,7 +53,11 @@ const RestaurantHome = () => {
         <div>
             <RestaurantSelector restaurants={restaurants} onSelection={onRestaurantSelection} />
             <Link to={'/new-restaurant'}>Create restaurant</Link>
-            <CurrentRestaurant restaurant={selectedRestaurant} onUpdateRestaurant={saveChanges} />
+            <CurrentRestaurant
+                restaurant={selectedRestaurant}
+                onUpdateRestaurant={saveChanges}
+                onDeleteRestaurant={deleteRestaurant}
+            />
         </div>
     );
 };

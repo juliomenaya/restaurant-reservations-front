@@ -31,3 +31,17 @@ export const createRestaurant = async (token: string, newRestaurant: INewRestaur
     );
     return response.data as IRestaurant;
 };
+
+export const deleteRestaurant = async (token: string, restaurantId: number) => {
+    try {
+        const response = await api.delete(
+            `restaurants/${restaurantId}/`,
+            {
+                headers: { Authorization: `Token ${token}` }
+            }
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+};
