@@ -6,3 +6,7 @@ export interface IRestaurant {
 export interface IRestaurantUpdates {
     name: string
 };
+
+export interface INewRestaurant {
+    name: string
+};

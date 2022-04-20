@@ -12,6 +12,7 @@ import store from './store';
 import { Login } from './components/Owner';
 import RestaurantHome from './components/Restaurant/RestaurantHome';
 import ProtectedRoute from './components/ProtectedRoute';
+import NewRestaurant from './components/Restaurant/NewRestaurant';
 
 
 function App() {
@@ -26,6 +27,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <RestaurantHome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="new-restaurant"
+              element={
+                <ProtectedRoute>
+                  <NewRestaurant />
                 </ProtectedRoute>
               }
             />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 import { State } from "../../reducers";
@@ -7,7 +8,7 @@ import { IRestaurant, IRestaurantUpdates } from "../../types/restaurantTypes";
 import { getRestaurants, updateRestaurant } from "../../services/restaurantService";
 import RestaurantSelector from "./RestaurantSelector";
 import CurrentRestaurant from "./CurrentRestaurant";
-import NewRestaurant from "./NewRestaurant";
+
 
 const RestaurantHome = () => {
     const { token } = useSelector((state: State) => state.owner);
@@ -40,8 +41,8 @@ const RestaurantHome = () => {
     return restaurants && (
         <div>
             <RestaurantSelector restaurants={restaurants} onSelection={onRestaurantSelection} />
+            <Link to={'/new-restaurant'}>Create restaurant</Link>
             <CurrentRestaurant restaurant={selectedRestaurant} onUpdateRestaurant={saveChanges} />
-            <NewRestaurant />
         </div>
     );
 };

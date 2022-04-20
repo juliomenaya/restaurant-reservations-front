@@ -1,4 +1,4 @@
-import { IRestaurant, IRestaurantUpdates } from "../types/restaurantTypes";
+import { INewRestaurant, IRestaurant, IRestaurantUpdates } from "../types/restaurantTypes";
 
 
 import { api } from ".";
@@ -14,6 +14,17 @@ export const updateRestaurant = async (token: string, restaurantId: number, upda
     const response = await api.patch(
         `restaurants/${restaurantId}/`,
         updates,
+        {
+            headers: { Authorization: `Token ${token}` }
+        }
+    );
+    return response.data as IRestaurant;
+};
+
+export const createRestaurant = async (token: string, newRestaurant: INewRestaurant) => {
+    const response = await api.post(
+        'restaurants/',
+        newRestaurant,
         {
             headers: { Authorization: `Token ${token}` }
         }

@@ -21,7 +21,6 @@ const CurrentRestaurant = ({ restaurant, onUpdateRestaurant }: ICurrentRestauran
                 <Form.Group className="mb-3">
                     <Form.Label>Restaurant name:</Form.Label>
                     <Form.Control
-                        placeholder="Type your email or username"
                         defaultValue={restaurant.name}
                         onChange={e => setUpdatedName(e.target.value)}
                     />
