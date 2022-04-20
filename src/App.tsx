@@ -10,6 +10,7 @@ import { Container } from 'react-bootstrap';
 
 import store from './store';
 import { Login } from './components/Owner';
+import RestaurantHome from './components/Restaurant/RestaurantHome';
 import ProtectedRoute from './components/ProtectedRoute';
 
 
@@ -24,7 +25,7 @@ function App() {
               path="restaurants"
               element={
                 <ProtectedRoute>
-                  <h1>Hey there</h1>
+                  <RestaurantHome />
                 </ProtectedRoute>
               }
             />
