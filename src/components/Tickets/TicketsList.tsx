@@ -57,28 +57,31 @@ const TicketsList = ({ restaurantId }: ITicketsListProps) => {
     // ];
     
     return tickets && (
-        <Table striped bordered hover>
-            <thead>
-                <tr>
-                    <th>Ticket name</th>
-                    <th>Restaurant name</th>
-                    <th>Max purchase count</th>
-                    <th>Available</th>
-                </tr>
-            </thead>
-            <tbody>
-                {tickets.map(ticket => {
-                    return (
-                        <tr key={ticket.id}>
-                            <td>{ticket.name}</td>
-                            <td>{ticket.restaurantName}</td>
-                            <td>{ticket.maxPurchaseCount}</td>
-                            <td>{ticket.availableCoupons}</td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </Table>
+        <div>
+            <h2>Tickets list:</h2>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>Ticket name</th>
+                        <th>Restaurant name</th>
+                        <th>Max purchase count</th>
+                        <th>Available</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tickets.map(ticket => {
+                        return (
+                            <tr key={ticket.id}>
+                                <td>{ticket.name}</td>
+                                <td>{ticket.restaurantName}</td>
+                                <td>{ticket.maxPurchaseCount}</td>
+                                <td>{ticket.availableCoupons}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </Table>
+        </div>
     );
 };
 

@@ -41,6 +41,7 @@ const CurrentRestaurant = ({ restaurant, onUpdateRestaurant, onDeleteRestaurant 
                     Delete
                 </Button>
             </Form>
+            <br />
             <TicketsList restaurantId={restaurant.id}/>
         </div>
     );
