@@ -24,7 +24,7 @@ const Login = () => {
         "TS2774: This condition will always return true since this function is always defined. Did you mean to call it instead"*/
         const logged = await login(username, password);
         if (logged) {
-            navigate('/expenses');
+            navigate('/restaurants');
         } else {
             setLoginError(true);
         }
