@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 
 
 import { IRestaurant, IRestaurantUpdates } from "../../types/restaurantTypes";
+import TicketsList from "../Tickets/TicketsList";
 import './restaurantStyles.css';
 
 interface ICurrentRestaurantProps {
@@ -40,6 +41,7 @@ const CurrentRestaurant = ({ restaurant, onUpdateRestaurant, onDeleteRestaurant 
                     Delete
                 </Button>
             </Form>
+            <TicketsList restaurantId={restaurant.id}/>
         </div>
     );
 };
