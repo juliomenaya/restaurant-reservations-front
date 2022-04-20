@@ -3,26 +3,22 @@ import { useSelector } from "react-redux";
 
 
 import { State } from "../../reducers";
-import { IRestaurantResponse } from "../../types/restaurantTypes";
+import { IRestaurant } from "../../types/restaurantTypes";
 import { getRestaurants } from "../../services/restaurantService";
 
-const RestaurantSelector = () => {
-    const { token } = useSelector((state: State) => state.owner);
-    const [restaurants, setRestaurants] = useState<Array<IRestaurantResponse>|IRestaurantResponse[]>([]);
+interface IRestaurantSelectorProps {
+    restaurants: Array<IRestaurant>,
+    onSelection: (restaurantId: number) => void
+};
 
-    useEffect(() => {
-        const fetchRestaurants = async () => {
-            const response = await getRestaurants(token);
-            setRestaurants(response);
-        };
-        fetchRestaurants()
-    }, [token]);
-
-    return restaurants && (
-        <select>
-            <option value="Select a restaurant"> -- Select a restaurant -- </option>
-            {restaurants.map((restaurant) => <option key={restaurant.id}>{restaurant.name}</option>)}
-        </select>
+const RestaurantSelector = ({ restaurants, onSelection }: IRestaurantSelectorProps) => {
+    return (
+        <div>
+            <span>Select your restaurant:</span>
+            <select onChange={(e) => onSelection(parseInt(e.target.value))}>
+                {restaurants.map((restaurant) => <option key={restaurant.id} value={restaurant.id}>{restaurant.name}</option>)}
+            </select>
+        </div>
     );
 };
 
