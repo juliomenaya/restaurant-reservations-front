@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { State } from "../../reducers";
 import { Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 import { ITicket } from "../../types/ticketTypes";
@@ -33,6 +33,7 @@ const TicketsList = ({ restaurantId }: ITicketsListProps) => {
     return tickets && (
         <div>
             <h2>Tickets list:</h2>
+            <Link to={`/restaurants/${restaurantId}/ticket-creation`}>Create ticket</Link>
             <Table striped bordered hover>
                 <thead>
                     <tr>

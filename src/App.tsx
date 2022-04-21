@@ -14,6 +14,7 @@ import RestaurantHome from './components/Restaurant/RestaurantHome';
 import ProtectedRoute from './components/ProtectedRoute';
 import NewRestaurant from './components/Restaurant/NewRestaurant';
 import TicketDetail from './components/Tickets/TicketDetail';
+import NewTicket from './components/Tickets/NewTicket';
 
 
 function App() {
@@ -44,6 +45,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <TicketDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="restaurants/:restaurantId/ticket-creation"
+              element={
+                <ProtectedRoute>
+                  <NewTicket />
                 </ProtectedRoute>
               }
             />

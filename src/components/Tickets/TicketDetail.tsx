@@ -55,7 +55,7 @@ const TicketDetail = () => {
                         onChange={e => setAvailability(parseInt(e.target.value))}
                         type='number'
                     />
-                    <Form.Label>Availability</Form.Label>
+                    <Form.Label>Still available</Form.Label>
                     <Form.Control
                         defaultValue={ticket?.availableCoupons}
                         disabled

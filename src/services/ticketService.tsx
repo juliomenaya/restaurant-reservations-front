@@ -1,5 +1,5 @@
 import { api } from ".";
-import { ITicket, ITicketResponse, ITicketToUpdate } from "../types/ticketTypes";
+import { ITicket, ITicketCreation, ITicketCreationResponse, ITicketResponse, ITicketToUpdate } from "../types/ticketTypes";
 
 const ticketToCamelCase = (snakeCaseTicket: ITicketResponse): ITicket => {
     return {
@@ -43,4 +43,16 @@ export const updateTicket = async (token: string, ticketId: number, updates: ITi
     );
     const ticketResponse: ITicketResponse = response.data;
     return ticketToCamelCase(ticketResponse);
+};
+
+export const createTicket = async (token: string, newTicket: ITicketCreation) => {
+    const response = await api.post(
+        'tickets/',
+        newTicket,
+        {
+            headers: { Authorization: `Token ${token}` }
+        }
+    );
+    return response.data as ITicketCreationResponse;
+
 };

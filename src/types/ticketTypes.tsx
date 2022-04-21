@@ -21,3 +21,14 @@ export interface ITicketToUpdate {
     max_purchase_count: number,
     name: string
 };
+
+export interface ITicketCreation {
+    restaurant: number,
+	name: string,
+	max_purchase_count: number
+};
+
+export interface ITicketCreationResponse {
+    max_purchase_count: number,
+    name: string
+};
