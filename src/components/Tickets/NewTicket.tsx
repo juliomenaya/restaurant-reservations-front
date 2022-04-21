@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 
+import './ticketsStyles.css';
 import { State } from "../../reducers";
 import { createTicket } from "../../services/ticketService";
 
@@ -21,31 +22,34 @@ const NewTicket = () => {
             name,
             restaurant: parseInt(restaurantId)
         });
-        navigate(-1);
+        navigate(-1);  // back to ticket list
     };
 
     return (
-        <Form>
-            <Form.Group className="mb-3">
-                <Form.Label>Ticket name:</Form.Label>
-                <Form.Control
-                    onChange={e => setName(e.target.value)}
-                />
-                <Form.Label>How many are going to be available?</Form.Label>
-                <Form.Control
-                    defaultValue={10}
-                    min={1}  // avoid edit max purchase with less available tickets
-                    onChange={e => setAvailability(parseInt(e.target.value))}
-                    type='number'
-                />
-            </Form.Group>
-            <Button
-                variant="primary"
-                onClick={create}
-            >
-                Save changes
-            </Button>
-        </Form>
+        <div className="ticket-creation-container">
+            <h2>Ticket Creation</h2>
+            <Form>
+                <Form.Group className="mb-3">
+                    <Form.Label>Ticket name:</Form.Label>
+                    <Form.Control
+                        onChange={e => setName(e.target.value)}
+                    />
+                    <Form.Label>How many are going to be available?</Form.Label>
+                    <Form.Control
+                        defaultValue={10}
+                        min={1}  // avoid edit max purchase with less available tickets
+                        onChange={e => setAvailability(parseInt(e.target.value))}
+                        type='number'
+                    />
+                </Form.Group>
+                <Button
+                    variant="primary"
+                    onClick={create}
+                >
+                    Save changes
+                </Button>
+            </Form>
+        </div>
     );
 };
 

@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Button, Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 import './ticketsStyles.css'
 import { State } from "../../reducers";
-import { getTicketDetail, updateTicket } from "../../services/ticketService";
+import { getTicketDetail, updateTicket, deleteTicket } from "../../services/ticketService";
 import { ITicket } from "../../types/ticketTypes";
 
 
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
-
     const [ticket, setTicket] = useState<ITicket|undefined>(undefined);
     const [name, setName] = useState<string>('');
     const [availability, setAvailability] = useState<number>(1);
+
     const { token } = useSelector((state: State) => state.owner);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getDetail = async () => {
@@ -36,6 +37,13 @@ const TicketDetail = () => {
 	            max_purchase_count: availability
             }
         );
+    };
+
+    const onDelete = async () => {
+        const deleted = await deleteTicket(token, parseInt(ticketId));
+        if (deleted) {
+            navigate(-1); // go back to ticketlist
+        }
     };
 
     return ticket && (
@@ -71,6 +79,13 @@ const TicketDetail = () => {
                     onClick={update}
                 >
                     Save changes
+                </Button>
+                <Button
+                    variant="danger"
+                    onClick={onDelete}
+                    style={{marginLeft: 20}}
+                >
+                    Delete
                 </Button>
             </Form>
         </div>

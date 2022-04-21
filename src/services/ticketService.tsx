@@ -56,3 +56,17 @@ export const createTicket = async (token: string, newTicket: ITicketCreation) =>
     return response.data as ITicketCreationResponse;
 
 };
+
+export const deleteTicket = async (token: string, ticketId: number) => {
+    try {
+        const response = await api.delete(
+            `tickets/${ticketId}/`,
+            {
+                headers: { Authorization: `Token ${token}` }
+            }
+        );
+        return true;
+    } catch (error) {
+        return false;
+    }
+};

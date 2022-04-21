@@ -1,4 +1,4 @@
-.ticket-detail-container {
+.ticket-detail-container, .ticket-creation-container {
     margin-top: 40px;
     padding: 0px 100px;
 }
