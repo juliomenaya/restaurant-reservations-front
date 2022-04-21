@@ -16,3 +16,8 @@ export interface ITicket {
     availableCoupons: number,
     restaurantName: string
 };
+
+export interface ITicketToUpdate {
+    max_purchase_count: number,
+    name: string
+};

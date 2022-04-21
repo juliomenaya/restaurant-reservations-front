@@ -1,7 +1,17 @@
 import { api } from ".";
-import { ITicket, ITicketResponse } from "../types/ticketTypes";
+import { ITicket, ITicketResponse, ITicketToUpdate } from "../types/ticketTypes";
 
-export const getTicketsByRestaurant = async (token, restaurantId: number) => {
+const ticketToCamelCase = (snakeCaseTicket: ITicketResponse): ITicket => {
+    return {
+        id: snakeCaseTicket.id,
+        name: snakeCaseTicket.name,
+        maxPurchaseCount: snakeCaseTicket.max_purchase_count,
+        availableCoupons: snakeCaseTicket.available_coupons,
+        restaurantName: snakeCaseTicket.restaurant_name
+    };
+};
+
+export const getTicketsByRestaurant = async (token: string, restaurantId: number) => {
     const response = await api.get(
         `tickets/restaurant_coupons?restaurant=${restaurantId}`,
         {
@@ -9,14 +19,28 @@ export const getTicketsByRestaurant = async (token, restaurantId: number) => {
         }
     );
     const tickets: Array<ITicketResponse> = response.data;
-    return tickets.map(ticket => {
-        const _ticket: ITicket = {
-            id: ticket.id,
-            name: ticket.name,
-            maxPurchaseCount: ticket.max_purchase_count,
-            availableCoupons: ticket.available_coupons,
-            restaurantName: ticket.restaurant_name
-        };
-        return _ticket;
-    });
+    return tickets.map(ticket => ticketToCamelCase(ticket));
+};
+
+export const getTicketDetail = async (token: string, ticketId: number) => {
+    const response = await api.get(
+        `tickets/${ticketId}`,
+        {
+            headers: { Authorization: `Token ${token}` }
+        }
+    );
+    const ticket: ITicketResponse = response.data;
+    return ticketToCamelCase(ticket);
+};
+
+export const updateTicket = async (token: string, ticketId: number, updates: ITicketToUpdate) => {
+    const response = await api.patch(
+        `tickets/${ticketId}/`,
+        updates,
+        {
+            headers: { Authorization: `Token ${token}` }
+        }
+    );
+    const ticketResponse: ITicketResponse = response.data;
+    return ticketToCamelCase(ticketResponse);
 };

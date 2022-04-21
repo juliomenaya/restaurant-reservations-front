@@ -13,6 +13,7 @@ import { Login } from './components/Owner';
 import RestaurantHome from './components/Restaurant/RestaurantHome';
 import ProtectedRoute from './components/ProtectedRoute';
 import NewRestaurant from './components/Restaurant/NewRestaurant';
+import TicketDetail from './components/Tickets/TicketDetail';
 
 
 function App() {
@@ -35,6 +36,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <NewRestaurant />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="tickets/:ticketId"
+              element={
+                <ProtectedRoute>
+                  <TicketDetail />
                 </ProtectedRoute>
               }
             />
